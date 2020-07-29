@@ -14,6 +14,7 @@ print("------------------------------------------")
 print("The screen resolution is {}p X {}p.".format(width, height))
 print("------------------------------------------")
 
+print("Now, drawing flag of Nepal: ")
 # starting a new window
 window = pygame.display.set_mode((500, 600))
 pygame.display.set_caption("Lab 1 - Flag")
@@ -50,16 +51,16 @@ while running:
     A (100, 500)                    B (400, 500)
     """
 
-    bod = 12
+    border = 12
 
     # upper outer triangle
     pygame.draw.polygon(
         window,
         DARK_BLUE,
         [
-            (100 - bod, 100 - 2 * bod),
-            (100 - bod, 300 + bod),
-            (400 + 3 * bod, 300 + bod),
+            (100 - border, 100 - 2 * border),
+            (100 - border, 300 + border),
+            (400 + 3 * border, 300 + border),
         ],
     )
 
@@ -68,9 +69,9 @@ while running:
         window,
         DARK_BLUE,
         [
-            (100 - bod, 200 - 2 * bod - 5),
-            (100 - bod, 500 + bod),
-            (400 + 2 * bod + 5, 500 + bod),
+            (100 - border, 200 - 2 * border - 5),
+            (100 - border, 500 + border),
+            (400 + 2 * border + 5, 500 + border),
         ],
     )
 
@@ -81,17 +82,17 @@ while running:
     pygame.draw.polygon(window, CRIMSON, [(100, 200), (100, 500), (400, 500)])
 
     # drawing the sun
-    num_points = 12
+    number_of_points = 12
     point_list = []
     center_x = 175
     center_y = 400
-    for i in range(num_points * 2):
+    for i in range(number_of_points * 2):
         radius = 60
         if i % 2 != 0:
             radius = radius // 1.5
-        ang = i * 3.14159 / num_points
-        x = center_x + int(math.cos(ang) * radius)
-        y = center_y + int(math.sin(ang) * radius)
+        angle = i * math.pi / number_of_points
+        x = center_x + int(math.cos(angle) * radius)
+        y = center_y + int(math.sin(angle) * radius)
         point_list.append((x, y))
 
     pygame.draw.polygon(window, WHITE, point_list)
@@ -104,29 +105,30 @@ while running:
     # drawing the moon
     pygame.draw.circle(window, WHITE, (175, 234), 60)
     pygame.draw.circle(window, CRIMSON, (175, 220), 58)
-    num_points = 16
+    number_of_points = 16
     point_list = []
     center_x = 175
     center_y = 260
-    for i in range(num_points * 2):
+    for i in range(number_of_points * 2):
         radius = 40
         if i % 2 == 0:
             radius = radius // 1.3
-        ang = i * 3.14159 / num_points
-        x = center_x + int(math.cos(ang) * radius)
-        y = center_y + int(math.sin(ang) * radius)
+        angle = i * math.pi / number_of_points
+        x = center_x + int(math.cos(angle) * radius)
+        y = center_y + int(math.sin(angle) * radius)
         point_list.append((x, y))
 
     del point_list[5:13]
     pygame.draw.polygon(window, WHITE, point_list)
 
+    # writing text in the displayed window
     font = pygame.font.SysFont("arial", 28)
     font_2 = pygame.font.SysFont("helvetiva", 18)
     text = font.render("National Flag of Nepal", True, BLACK)
     name = font_2.render("Aashish KC", True, BLACK)
     window.blit(text, (90, 520))
     window.blit(name, (420, 580))
-    pygame.display.update()
+    # pygame.display.update()
 
     pygame.display.flip()
     clock.tick(60)
